@@ -9,6 +9,6 @@ public class HelloWorldResource {
 
     @GET
     public String getHello(@PathParam("name") String name) {
-        return "Hello " + name + "!";
+        return "Hello there, " + name + "!";
     }
 }
