@@ -1,6 +1,8 @@
 package com.idaeo.dropwizard.core;
 
-
+/**
+ * Tenant domain model object and methods
+ */
 public class Tenant {
     private final long id;
     private final String name;
