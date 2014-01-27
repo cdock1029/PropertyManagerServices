@@ -25,9 +25,9 @@ public class TenantsResource {
         tenants = new ArrayList<>();
         Tenant conor, amanda, bill;
 
-        conor = new Tenant(1, "Conor Dockry", "conordockry@gmail.com", "2200", "W801", "3307270027");
-        amanda = new Tenant(2, "Amanda Becerra", "aebecerra28@gmail.com", "AEBuilding", "404", "5557271414");
-        bill = new Tenant(3, "William Brasky", "billb@gmail.com", "30Rock", "500", "5558675309");
+        conor = new Tenant(1, "Conor Dockry", "conordockry@gmail.com", "3307270027");
+        amanda = new Tenant(2, "Amanda Becerra", "aebecerra28@gmail.com", "5557271414");
+        bill = new Tenant(3, "William Brasky", "billb@gmail.com", "5558675309");
 
         tenants.add(conor);
         tenants.add(amanda);

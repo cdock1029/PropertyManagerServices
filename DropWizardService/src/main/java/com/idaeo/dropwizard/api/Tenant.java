@@ -1,31 +1,38 @@
 package com.idaeo.dropwizard.api;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.yammer.dropwizard.json.JsonSnakeCase;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
 
 /**
  * Tenant domain model object and methods
  */
+@DynamoDBTable(tableName = "Tenant")
 @JsonSnakeCase
-public class Tenant {
+public class Tenant extends CoreEntity {
     private long id;
     @NotEmpty
     private String name;
     @NotEmpty
     private String email;
-    private String building;
-    private String unit;
     @NotEmpty
     private String phone;
 
-    public Tenant(long id, String name, String email, String building, String unit, String phone) {
+    public Tenant(long id, String name, String email, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.building = building;
-        this.unit = unit;
         this.phone = phone;
     }
+
+    public Tenant(String name, String email, String phone) {
+        this(DateTime.now().getMillis(), name, email, phone);
+    }
+
+    @DynamoDBHashKey
     public long getId() {
         return id;
     }
@@ -34,6 +41,7 @@ public class Tenant {
         this.id = id;
     }
 
+    @DynamoDBAttribute
     public String getName() {
         return name;
     }
@@ -42,6 +50,7 @@ public class Tenant {
         this.name = name;
     }
 
+    @DynamoDBAttribute
     public String getEmail() {
         return email;
     }
@@ -50,22 +59,7 @@ public class Tenant {
         this.email = email;
     }
 
-    public String getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(String building) {
-        this.building = building;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
+    @DynamoDBAttribute
     public String getPhone() {
         return phone;
     }

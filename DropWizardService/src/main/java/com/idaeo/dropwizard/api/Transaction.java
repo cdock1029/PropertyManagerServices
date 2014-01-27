@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
  * Created by conordockry on 12/15/13.
  */
 @JsonSnakeCase
-public class Transaction {
+public class Transaction extends CoreEntity {
     private DateTime transactionDate;
     private Money amount;
     private TransactionType type;
