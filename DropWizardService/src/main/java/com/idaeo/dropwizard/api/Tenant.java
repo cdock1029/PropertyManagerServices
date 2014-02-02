@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.yammer.dropwizard.json.JsonSnakeCase;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
@@ -13,13 +14,18 @@ import org.joda.time.DateTime;
 @DynamoDBTable(tableName = "Tenant")
 @JsonSnakeCase
 public class Tenant extends CoreEntity {
-    private long id;
+    private Long id;
     @NotEmpty
     private String name;
     @NotEmpty
+    @Email
     private String email;
     @NotEmpty
     private String phone;
+
+    public Tenant() {
+
+    }
 
     public Tenant(long id, String name, String email, String phone) {
         this.id = id;
@@ -33,11 +39,11 @@ public class Tenant extends CoreEntity {
     }
 
     @DynamoDBHashKey
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

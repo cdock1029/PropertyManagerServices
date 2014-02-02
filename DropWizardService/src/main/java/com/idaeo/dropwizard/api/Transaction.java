@@ -4,10 +4,6 @@ import com.yammer.dropwizard.json.JsonSnakeCase;
 import org.joda.money.Money;
 import org.joda.time.DateTime;
 
-
-/**
- * Created by conordockry on 12/15/13.
- */
 @JsonSnakeCase
 public class Transaction extends CoreEntity {
     private DateTime transactionDate;

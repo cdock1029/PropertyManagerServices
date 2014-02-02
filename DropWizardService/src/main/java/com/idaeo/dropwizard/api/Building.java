@@ -6,11 +6,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBVersionAttribute;
 
 /**
- * Created with IntelliJ IDEA.
- * User: conordockry
+ * @author cdock
  * Date: 1/26/14
  * Time: 4:42 PM
- * To change this template use File | Settings | File Templates.
  */
 @DynamoDBTable(tableName = "Building")
 public class Building extends CoreEntity {
@@ -20,6 +18,10 @@ public class Building extends CoreEntity {
     private String state;
     private String zip;
     private Long version;
+
+    public Building() {
+
+    }
 
     public Building(String name, String address, String city, String state, String zip) {
         this.name = name;

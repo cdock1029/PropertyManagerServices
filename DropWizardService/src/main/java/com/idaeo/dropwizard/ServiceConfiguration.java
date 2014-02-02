@@ -8,18 +8,50 @@ public class ServiceConfiguration extends Configuration {
 
     @NotEmpty
     @JsonProperty
-    private String template;
+    private String dynamoHost = "localhost";
 
     @NotEmpty
     @JsonProperty
-    private String defaultName = "Stranger";
+    private String dynamoPort = "8000";
+
+    @NotEmpty
+    @JsonProperty
+    private String awsAccessKey = "akey";
+
+    @NotEmpty
+    @JsonProperty
+    private String awsSecretKey = "skey";
 
 
-    public String getTemplate() {
-        return template;
+    public String getDynamoHost() {
+        return dynamoHost;
     }
 
-    public String getDefaultName() {
-        return defaultName;
+    public void setDynamoHost(String dynamoHost) {
+        this.dynamoHost = dynamoHost;
+    }
+
+    public String getDynamoPort() {
+        return dynamoPort;
+    }
+
+    public void setDynamoPort(String dynamoPort) {
+        this.dynamoPort = dynamoPort;
+    }
+
+    public String getAwsAccessKey() {
+        return awsAccessKey;
+    }
+
+    public void setAwsAccessKey(String awsAccesKey) {
+        this.awsAccessKey = awsAccesKey;
+    }
+
+    public String getAwsSecretKey() {
+        return awsSecretKey;
+    }
+
+    public void setAwsSecretKey(String awsSecretKey) {
+        this.awsSecretKey = awsSecretKey;
     }
 }

@@ -2,22 +2,17 @@ package com.idaeo.dropwizard.util;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.PropertiesCredentials;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.idaeo.dropwizard.api.Building;
 import com.idaeo.dropwizard.api.Tenant;
 
 import java.io.IOException;
 
 /**
- * Created with IntelliJ IDEA.
- * User: conordockry
+ * @author cdock
  * Date: 1/26/14
  * Time: 5:26 PM
- * To change this template use File | Settings | File Templates.
  */
 public class TestDataUtil {
     static AmazonDynamoDBClient client;
