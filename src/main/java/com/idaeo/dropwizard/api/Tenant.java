@@ -14,7 +14,7 @@ import org.joda.time.DateTime;
 @DynamoDBTable(tableName = "Tenant")
 @JsonSnakeCase
 public class Tenant extends CoreEntity {
-    private Long id;
+    private Long id = DateTime.now().getMillis();
     @NotEmpty
     private String name;
     @NotEmpty
@@ -27,7 +27,7 @@ public class Tenant extends CoreEntity {
 
     }
 
-    public Tenant(long id, String name, String email, String phone) {
+    private Tenant(long id, String name, String email, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
