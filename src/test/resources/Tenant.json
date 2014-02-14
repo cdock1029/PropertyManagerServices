@@ -1,5 +1,7 @@
 {
-    "name": "George Costanza",
-    "email": "georgec@nbc.com",
-    "phone": "2125557890"
+    "tenant" : {
+        "name": "George Costanza",
+        "email": "georgec@nbc.com",
+        "phone": "2125557890"
+    }
 }

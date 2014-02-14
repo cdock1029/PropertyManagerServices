@@ -3,6 +3,7 @@ package com.idaeo.dropwizard.api;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBVersionAttribute;
 import com.yammer.dropwizard.json.JsonSnakeCase;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -14,7 +15,6 @@ import org.joda.time.DateTime;
 @DynamoDBTable(tableName = "Tenant")
 @JsonSnakeCase
 public class Tenant extends CoreEntity {
-    private Long id = DateTime.now().getMillis();
     @NotEmpty
     private String name;
     @NotEmpty
@@ -22,32 +22,19 @@ public class Tenant extends CoreEntity {
     private String email;
     @NotEmpty
     private String phone;
+    private Long version;
 
     public Tenant() {
 
     }
 
-    private Tenant(long id, String name, String email, String phone) {
-        this.id = id;
+    public Tenant(String name, String email, String phone) {
         this.name = name;
         this.email = email;
         this.phone = phone;
     }
 
-    public Tenant(String name, String email, String phone) {
-        this(DateTime.now().getMillis(), name, email, phone);
-    }
-
     @DynamoDBHashKey
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @DynamoDBAttribute
     public String getName() {
         return name;
     }
@@ -74,6 +61,8 @@ public class Tenant extends CoreEntity {
         this.phone = phone;
     }
 
-
+    @DynamoDBVersionAttribute
+    public Long getVersion() { return version; }
+    public void setVersion(Long version) { this.version = version; }
 
 }
