@@ -2,56 +2,42 @@ package com.idaeo.dropwizard;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yammer.dropwizard.config.Configuration;
+import com.yammer.dropwizard.db.DatabaseConfiguration;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+@NoArgsConstructor
 public class ServiceConfiguration extends Configuration {
 
-    @NotEmpty
+    @NotBlank
     @JsonProperty
+    @Getter @Setter
     private String dynamoHost = "localhost";
 
-    @NotEmpty
+    @NotBlank
     @JsonProperty
+    @Getter @Setter
     private String dynamoPort = "8000";
 
-    @NotEmpty
+    @NotBlank
     @JsonProperty
+    @Getter @Setter
     private String awsAccessKey = "akey";
 
-    @NotEmpty
+    @NotBlank
     @JsonProperty
+    @Getter @Setter
     private String awsSecretKey = "skey";
 
-
-    public String getDynamoHost() {
-        return dynamoHost;
-    }
-
-    public void setDynamoHost(String dynamoHost) {
-        this.dynamoHost = dynamoHost;
-    }
-
-    public String getDynamoPort() {
-        return dynamoPort;
-    }
-
-    public void setDynamoPort(String dynamoPort) {
-        this.dynamoPort = dynamoPort;
-    }
-
-    public String getAwsAccessKey() {
-        return awsAccessKey;
-    }
-
-    public void setAwsAccessKey(String awsAccesKey) {
-        this.awsAccessKey = awsAccesKey;
-    }
-
-    public String getAwsSecretKey() {
-        return awsSecretKey;
-    }
-
-    public void setAwsSecretKey(String awsSecretKey) {
-        this.awsSecretKey = awsSecretKey;
-    }
+    @Valid
+    @NotNull
+    @JsonProperty
+    @Getter @Setter
+    private DatabaseConfiguration databaseConfiguration = new DatabaseConfiguration();
 }

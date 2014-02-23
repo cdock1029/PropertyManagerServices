@@ -23,6 +23,39 @@
       <artifactId>dropwizard-core</artifactId>
       <version>0.6.2</version>
     </dependency>
+
+    <!-- hibernate -->
+    <dependency>
+        <groupId>com.yammer.dropwizard</groupId>
+        <artifactId>dropwizard-db</artifactId>
+        <version>0.6.2</version>
+    </dependency>
+      <dependency>
+          <groupId>com.yammer.dropwizard</groupId>
+          <artifactId>dropwizard-hibernate</artifactId>
+          <version>0.6.2</version>
+      </dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>4.1.9.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-hibernate4</artifactId>
+        <version>2.1.2</version>
+    </dependency>
+    <dependency>
+    <groupId>org.jadira.usertype</groupId>
+    <artifactId>usertype.core</artifactId>
+    <version>3.0.0.GA</version>
+    </dependency>
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.1.29</version>
+      </dependency>
+
     <dependency>
       <groupId>org.joda</groupId>
       <artifactId>joda-money</artifactId>
@@ -49,6 +82,11 @@
       <artifactId>guice</artifactId>
       <version>4.0-beta</version>
     </dependency>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.12.4</version>
+      </dependency>
   </dependencies>
 
   <build>
@@ -103,7 +141,7 @@
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.idaeo.dropwizard.TenantService</mainClass>
+                  <mainClass>com.idaeo.dropwizard.TenantManagementService</mainClass>
                 </transformer>
               </transformers>
             </configuration>

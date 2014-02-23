@@ -1,12 +1,14 @@
 package com.idaeo.dropwizard.resources;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
-import com.idaeo.dropwizard.api.Building;
+import com.idaeo.dropwizard.api.model.Building;
+import com.idaeo.dropwizard.api.model.wrapper.BuildingListWrapper;
+import com.idaeo.dropwizard.api.model.wrapper.BuildingWrapper;
+import com.idaeo.dropwizard.data.BuildingDAO;
+import com.yammer.dropwizard.hibernate.UnitOfWork;
 import com.yammer.metrics.annotation.Timed;
-import org.apache.commons.lang3.StringUtils;
+import lombok.RequiredArgsConstructor;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,35 +20,50 @@ import java.util.List;
  */
 @Path("/buildings")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@RequiredArgsConstructor
 public class BuildingResource {
 
-    private final DynamoDBMapper mapper;
+    private final BuildingDAO dao;
 
-    public BuildingResource(DynamoDBMapper mapper) {
-        this.mapper = mapper;
+    @GET
+    @Timed
+    @UnitOfWork
+    public BuildingListWrapper listBuildings() {
+        List<Building> all = dao.findAll();
+        BuildingListWrapper buildingListWrapper = new BuildingListWrapper();
+        buildingListWrapper.setBuildings(all);
+        return buildingListWrapper;
     }
 
     @GET
     @Timed
-    public List<Building> listBuildings() {
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-        PaginatedScanList<Building> scanList = mapper.scan(Building.class, scanExpression);
-        scanList.loadAllResults();
-        return scanList;
+    @Path("/{id}")
+    @UnitOfWork
+    public BuildingWrapper getBuilding(@PathParam("id") Long id) {
+        Building building = dao.findById(id);
+        if (null == building) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        BuildingWrapper buildingWrapper = new BuildingWrapper();
+        buildingWrapper.setBuilding(building);
+        return buildingWrapper;
     }
 
-    @GET
+    @POST
     @Timed
-    @Path("/{name}")
-    public Building getBuilding(@PathParam("name") String name) {
-        WebApplicationException ex = new WebApplicationException(Response.Status.NOT_FOUND);
-        if (StringUtils.isEmpty(name)) {
-            throw ex;
-        }
-        Building building = mapper.load(Building.class, name);
-        if (building == null) {
-            throw ex;
-        }
-        return building;
+    @UnitOfWork
+    public Response createBuildings(@Valid BuildingListWrapper buildingListWrapper) {
+        dao.batchCreate(buildingListWrapper.getBuildings());
+        return Response.ok().build();
+    }
+
+    @DELETE
+    @Timed
+    @UnitOfWork
+    @Path("/{id}")
+    public Response deleteBuilding(@PathParam("id") Long id) {
+        dao.deleteById(id);
+        return Response.ok().build();
     }
 }

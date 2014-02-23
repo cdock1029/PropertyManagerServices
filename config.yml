@@ -1,8 +1,26 @@
 http:
-  port: 8080
-  adminPort: 8081
+    port: 8080
+    adminPort: 8081
 
 awsAccessKey: akid
 awsSecretKey: skey
 dynamoHost: localhost
 dynamoPort: 8000
+
+databaseConfiguration:
+    driverClass: com.mysql.jdbc.Driver
+    user: cdock
+    password: falcon14
+    url: jdbc:mysql://localhost:3306/property_manager
+
+    properties:
+        charSet: UTF-8
+        hibernate.hbm2ddl.auto: create
+
+    maxWaitForConnection: 1s
+    validationQuery: "/* Service Health Check */ SELECT 1"
+    minSize: 4
+    maxSize: 32
+    checkConnectionWhileIdle: false
+    checkConnectionHealthWhenIdleFor: 10s
+    closeConnectionIfIdleFor: 1 minute
